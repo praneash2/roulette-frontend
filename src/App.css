@@ -1,0 +1,49 @@
+*{
+  margin:0;
+  padding:0;
+}
+.wallets-connection-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.doz-item,.zero-item,.column-item,.outside-section{
+  background-color: rgb(135, 67, 177);
+}
+
+input{
+  padding:10px;
+  border-radius: 5px;
+  border:0;
+  background-color: rgb(178, 255, 229);
+}
+
+button{
+  padding:10px;
+  border:0px;
+  font-weight: bold;
+  background-color: rgba(178, 114, 114, 0.648);
+}
+
+.website-name{
+  color:red;
+  padding:0px 10px;
+}
+
+.nav-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.play-again{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.note{
+  display: flex;
+  justify-content: center;
+}

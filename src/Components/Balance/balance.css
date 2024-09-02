@@ -1,0 +1,7 @@
+.wallet-balance{
+    display: flex;
+    align-items: center;
+    gap:5px;
+    padding: 0px 10px;
+    flex-wrap: wrap;
+}
