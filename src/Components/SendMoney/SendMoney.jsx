@@ -28,18 +28,40 @@ const SendMoney = ({setBetAmount,UserName}) => {
         "signature":signature
     
     }
-      const response = await fetch(`${constant.BACKEND_URL}bet`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data) // Convert JavaScript object to JSON string
-      });
-      const responseData = await response.json();
-      console.log("response",responseData);
-      setBetAmount(responseData?.amount);
-      console.log(signature);
-      alert(`transaction of ${amount} successfull`,signature);
+    const params = new URLSearchParams(data);
+      //POC:SSE
+      let moneySentSSE=new EventSource(`http://localhost:8080/bet?${params.toString()}`);
+      let response;
+      moneySentSSE.onmessage=(e)=>{
+        response=JSON.parse(e.data);
+        if(response.message==="waiting for confirmation"){
+          //set loading true
+          console.log(response.message);
+        }
+        else if(response.message==="bet received"){
+          // setBetAmount(response?.amount);
+          alert(`transaction received`);
+          moneySentSSE.close();
+        }
+        else{
+          alert(`transaction not received`);
+          moneySentSSE.close();
+        }
+        console.log(JSON.parse(e.data),"sse");
+      }
+      //POC:SSE
+      // const response = await fetch(`${constant.BACKEND_URL}bet`, {
+      //   method: 'POST',
+      //   headers: {
+      //       'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(data) // Convert JavaScript object to JSON string
+      // });
+      // const responseData = await response.json();
+      // console.log("response",responseData);
+      // setBetAmount(responseData?.amount);
+      // console.log(signature);
+      alert(`transaction of ${amount} successfull`);
       }catch(err){
         alert("transaction failed");
         console.error(err);
